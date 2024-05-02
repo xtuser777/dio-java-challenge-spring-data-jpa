@@ -6,6 +6,8 @@ import br.com.xt.dio.spring.boot.gym.entity.Address;
 import br.com.xt.dio.spring.boot.gym.entity.Assessment;
 import br.com.xt.dio.spring.boot.gym.entity.Contact;
 import br.com.xt.dio.spring.boot.gym.entity.Student;
+import br.com.xt.dio.spring.boot.gym.repository.AddressRepository;
+import br.com.xt.dio.spring.boot.gym.repository.ContactRepository;
 import br.com.xt.dio.spring.boot.gym.repository.StudentRepository;
 import br.com.xt.dio.spring.boot.gym.util.JavaTimeUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +21,12 @@ public class StudentService implements IStudentService {
 
     @Autowired
     private StudentRepository studentRepository;
+
+    @Autowired
+    private AddressRepository addressRepository;
+
+    @Autowired
+    private ContactRepository contactRepository;
 
     @Override
     public Student create(CreateStudentDTO dto) {
@@ -74,14 +82,14 @@ public class StudentService implements IStudentService {
             dto.getAddressCity(),
             dto.getAddressState()
         );
-
+        address = addressRepository.save(address);
         Contact contact = new Contact(
                 0L,
                 dto.getPhone(),
                 dto.getCellphone(),
                 dto.getEmail()
         );
-
+        contact = contactRepository.save(contact);
         Student student = new Student();
         student.setId(0L);
         student.setName(dto.getName());

@@ -29,7 +29,7 @@ public class PersonDTO {
     private String cellphone;
 
     @NotEmpty(message = "Preencha o campo corretamente.")
-    @Max(value = 100, message = "E-mail pode conter no máximo 100 caracteres.")
+    @Size(min = 5, max = 100, message = "E-mail pode conter no máximo 100 caracteres.")
     @Email(message = "E-mail inválido.")
     private String email;
 
@@ -50,7 +50,7 @@ public class PersonDTO {
     private String addressCity;
 
     @NotEmpty(message = "Preencha o campo corretamente.")
-    @Size(min = 3, max = 50, message = "'${validatedValue}' precisa estar entre {min} e {max} caracteres.")
+    @Size(min = 2, max = 2, message = "'${validatedValue}' precisa estar entre {min} e {max} caracteres.")
     private String addressState;
 
 }
